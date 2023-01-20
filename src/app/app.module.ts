@@ -14,6 +14,10 @@ import { CaracteristicasEmpleadoComponent } from './caracteristicas-empleado/car
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { ActualizaComponent } from './actualiza/actualiza.component';
 import { EmpleadosService } from './empleados.service';
+import { DataServices } from './data.services';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 const appRoutes:Routes=[
 
@@ -40,10 +44,11 @@ const appRoutes:Routes=[
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
     
   ],
-  providers: [EmpleadosService],
+  providers: [EmpleadosService, DataServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

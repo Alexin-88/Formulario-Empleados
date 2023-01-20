@@ -17,7 +17,5 @@ export class EmpleadosComponent {
     this.listaCaracteristicas.push(caracteristica);
   }
 
-  eliminarEmpleado(){
-    
-  }
+
 }

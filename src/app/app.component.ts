@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Empleado } from './empleado.model';
+
 
 @Component({
   selector: 'app-root',

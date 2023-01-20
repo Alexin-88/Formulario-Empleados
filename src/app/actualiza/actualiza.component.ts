@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { DataServices } from '../data.services';
 import { Empleado } from '../empleado.model';
 import { EmpleadosService } from '../empleados.service';
 
@@ -10,7 +11,7 @@ import { EmpleadosService } from '../empleados.service';
 })
 export class ActualizaComponent implements OnInit{
 
-  constructor(private route:ActivatedRoute, private empleadoServicio:EmpleadosService, private router:Router) {
+  constructor(private route:ActivatedRoute, private empleadoServicio:EmpleadosService, private router:Router, private dataServices:DataServices) {
     
   }
   ngOnInit(): void {
@@ -33,13 +34,17 @@ export class ActualizaComponent implements OnInit{
   actualizaEmpleado(){
     let empleadoActualizado= new Empleado(this.cuadroNombre, this.cuadroApellido, this.cuadroCargo, this.cuadroSalario)
     this.empleadoServicio.actualizarEmpleadoServicio(empleadoActualizado, this.indice);
-    
+
+    this.dataServices.cargarEmpleados().subscribe();//PUSE AQUI ESTO PQ SINO YA SIEMPRE TENÍA QUE RECARGAR LA PAGINA PARA Q MOSTRASE LA ACTUALIZACION
+                                                    //Y ASI A VECES FUNCIONA A LA PRIMERA Y OT
+        
     this.router.navigate(['']);
     
   }
 
   eliminaEmpleado(){
     this.empleadoServicio.eliminarEmpleadoServicio(this.indice);
+    
 
     this.router.navigate(['']);
   }

@@ -1,20 +1,35 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 import { Empleado } from '../empleado.model';
 import { EmpleadosService } from '../empleados.service';
+
+
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
   constructor(private empleadoServicio:EmpleadosService){}
 
+  ngOnInit(): void {
+    
+
+    this.empleadoServicio.cargarEmpleado().subscribe(misEmpleados=>{
+
+      console.log(misEmpleados);
+
+      this.empleados=Object.values(misEmpleados);
+
+      this.empleadoServicio.setEmpleados(this.empleados);
+    });
+  }
+
   title = 'Listado de empleados';
 
-  empleados:Empleado[]=this.empleadoServicio.empleados;
+  empleados:Empleado[]=[];
 
 
   cuadroNombre:string="";
@@ -27,10 +42,5 @@ export class HomeComponent {
     let empleado = new Empleado(this.cuadroNombre, this.cuadroApellido, this.cuadroCargo, this.cuadroSalario);
 
     this.empleadoServicio.agregarEmpleadoServicio(empleado);
-    
-
   }
-
-
-
 }
